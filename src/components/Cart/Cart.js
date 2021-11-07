@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import CartContext from '../../context/cart-context';
+import CartContext from '../../store/cart-context';
 import Modal from '../UI/Modal/Modal';
 import classes from './Cart.module.css';
 
@@ -12,6 +12,8 @@ const Cart = (props) => {
 			))}
 		</ul>
 	);
+	if (ctx.showCart === false) return null;
+
 	return (
 		<Modal onClick={ctx.onHideCart}>
 			{cartItems}
