@@ -8,9 +8,49 @@ const defaultCartState = {
 
 const cartReducer = (state, action) => {
 	if (action.type === 'ADD') {
-		const updatedItems = state.items.concat(action.item);
+		const addedItemIndex = state.items.findIndex(
+			(item) => item.id === action.item.id
+		);
+		let updatedItems;
+		// Check if item already exist
+		// If item exists, increase quanity, else, add item
+		if (addedItemIndex === -1) {
+			const updatedItem = {
+				...action.item,
+				displayQuantity: action.item.quantity,
+			};
+			updatedItems = state.items.concat(updatedItem);
+		} else {
+			updatedItems = [...state.items];
+			updatedItems[addedItemIndex].displayQuantity += action.item.quantity;
+		}
 		const updatedTotalAmount =
 			state.totalAmount + action.item.price * action.item.quantity;
+		return {
+			items: updatedItems,
+			totalAmount: updatedTotalAmount,
+		};
+	}
+
+	if (action.type === 'REMOVE') {
+		const addedItemIndex = state.items.findIndex(
+			(item) => item.id === action.id
+		);
+		let updatedTotalAmount;
+		let updatedItems = [...state.items];
+
+		// Decrease quanity by one if quanity is >1
+		// Remove the item if quantity =1
+		if (updatedItems[addedItemIndex].displayQuantity > 1) {
+			updatedItems[addedItemIndex].displayQuantity--;
+			updatedTotalAmount =
+				state.totalAmount - updatedItems[addedItemIndex].price;
+		} else {
+			updatedTotalAmount =
+				state.totalAmount - updatedItems[addedItemIndex].price;
+			updatedItems.splice(addedItemIndex, 1);
+		}
+
 		return {
 			items: updatedItems,
 			totalAmount: updatedTotalAmount,
@@ -60,7 +100,6 @@ const CartProvider = (props) => {
 	];
 
 	const addItemToCartHandler = (item) => {
-		console.log(item);
 		dispatchCartAction({ type: 'ADD', item: item });
 	};
 	const removeItemFromCartHandler = (id) => {
