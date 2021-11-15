@@ -6,6 +6,21 @@ import CartContext from '../../store/cart-context';
 
 const AvailableMeals = () => {
 	const mealsCtx = useContext(CartContext);
+	if (mealsCtx.isLoading) {
+		return (
+			<section className={classes.MealsLoading}>
+				<p>Loading...</p>;
+			</section>
+		);
+	}
+
+	if (mealsCtx.httpErrorMsg) {
+		return (
+			<section className={classes.MealsError}>
+				<p>{mealsCtx.httpErrorMsg}</p>
+			</section>
+		);
+	}
 
 	const mealsList = mealsCtx.menuItems.map((meal) => (
 		<MealItem

@@ -84,32 +84,68 @@ const CartProvider = (props) => {
 	const hideCartHandler = () => {
 		setShowCart(false);
 	};
-	const menu = [
-		{
-			id: 'm1',
-			name: 'Sushi',
-			description: 'Finest fish and veggies',
-			price: 22.99,
-		},
-		{
-			id: 'm2',
-			name: 'Schnitzel',
-			description: 'A german specialty!',
-			price: 16.5,
-		},
-		{
-			id: 'm3',
-			name: 'Barbecue Burger',
-			description: 'American, raw, meaty',
-			price: 12.99,
-		},
-		{
-			id: 'm4',
-			name: 'Green Bowl',
-			description: 'Healthy...and green...',
-			price: 18.99,
-		},
-	];
+
+	// const menu = [
+	// 	{
+	// 		id: 'm1',
+	// 		name: 'Sushi',
+	// 		description: 'Finest fish and veggies',
+	// 		price: 22.99,
+	// 	},
+	// 	{
+	// 		id: 'm2',
+	// 		name: 'Schnitzel',
+	// 		description: 'A german specialty!',
+	// 		price: 16.5,
+	// 	},
+	// 	{
+	// 		id: 'm3',
+	// 		name: 'Barbecue Burger',
+	// 		description: 'American, raw, meaty',
+	// 		price: 12.99,
+	// 	},
+	// 	{
+	// 		id: 'm4',
+	// 		name: 'Green Bowl',
+	// 		description: 'Healthy...and green...',
+	// 		price: 18.99,
+	// 	},
+	// ];
+
+	// Load menu from Firebase backend server
+	const [isLoading, setIsLoading] = useState(false);
+	const [httpErrorMsg, setHttpErrorMsg] = useState(false);
+	const [menu, setMenu] = useState([]);
+	useEffect(() => {
+		setIsLoading(true);
+		const fetchMenu = async () => {
+			const response = await fetch(
+				`https://food-order-app-4fc86-default-rtdb.firebaseio.com/menu.jsson`
+			);
+
+			if (!response.ok) {
+				throw new Error('Something went wrong!');
+			}
+			const responseData = await response.json();
+			const loadedMeals = [];
+
+			for (const key in responseData) {
+				loadedMeals.push({
+					id: key,
+					name: responseData[key].name,
+					description: responseData[key].description,
+					price: responseData[key].price,
+				});
+			}
+			setMenu(loadedMeals);
+			setIsLoading(false);
+		};
+
+		fetchMenu().catch((error) => {
+			setIsLoading(false);
+			setHttpErrorMsg(error.message);
+		});
+	}, []);
 
 	const addItemToCartHandler = (item) => {
 		dispatchCartAction({ type: 'ADD', item: item });
@@ -123,6 +159,8 @@ const CartProvider = (props) => {
 		onShowCart: showCartHandler,
 		onHideCart: hideCartHandler,
 		menuItems: menu,
+		isLoading,
+		httpErrorMsg,
 
 		cartItems: cartState.items,
 		totalAmount: cartState.totalAmount,

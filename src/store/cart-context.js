@@ -5,6 +5,8 @@ const CartContext = React.createContext({
 	onShowCart: () => {},
 	onHideCart: () => {},
 	menuItems: [],
+	isLoading: false,
+	httpErrorMsg: null,
 
 	cartItems: [],
 	totalAmount: 0,
