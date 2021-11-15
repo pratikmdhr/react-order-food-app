@@ -56,6 +56,10 @@ const cartReducer = (state, action) => {
 			totalAmount: updatedTotalAmount,
 		};
 	}
+
+	if (action.type === 'CLEAR') {
+		return initializeCartState;
+	}
 };
 
 const CartProvider = (props) => {
@@ -120,7 +124,7 @@ const CartProvider = (props) => {
 		setIsLoading(true);
 		const fetchMenu = async () => {
 			const response = await fetch(
-				`https://food-order-app-4fc86-default-rtdb.firebaseio.com/menu.jsson`
+				`https://food-order-app-4fc86-default-rtdb.firebaseio.com/menu.json`
 			);
 
 			if (!response.ok) {
@@ -154,6 +158,10 @@ const CartProvider = (props) => {
 		dispatchCartAction({ type: 'REMOVE', id: id });
 	};
 
+	const clearCartHandler = () => {
+		dispatchCartAction({ type: 'CLEAR' });
+	};
+
 	const cartContext = {
 		showCart: showCart,
 		onShowCart: showCartHandler,
@@ -161,6 +169,7 @@ const CartProvider = (props) => {
 		menuItems: menu,
 		isLoading,
 		httpErrorMsg,
+		clearCart: clearCartHandler,
 
 		cartItems: cartState.items,
 		totalAmount: cartState.totalAmount,
