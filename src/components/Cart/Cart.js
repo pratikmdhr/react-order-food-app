@@ -14,8 +14,8 @@ const Cart = (props) => {
 	const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
 	const hasItems = cartCtx.cartItems.length > 0;
 
-  // Return early so that cart stays hidden until the cart button is pressed
-  if (cartCtx.showCart === false) return null;
+	// Return early so that cart stays hidden until the cart button is pressed
+	if (cartCtx.showCart === false) return null;
 
 	const cartItemRemoveHandler = (id) => {
 		cartCtx.removeItem(id);
@@ -34,7 +34,7 @@ const Cart = (props) => {
 		setIsCheckout(false);
 	};
 
-  // Submit data to backend server
+	// Submit data to backend server
 	const submitOrderHandler = async (userData) => {
 		setIsSubmitting(true);
 		await fetch(
@@ -52,7 +52,7 @@ const Cart = (props) => {
 		setDidSubmit(true);
 	};
 
-  //  Reset cart items, hide the success message, and show the original cart modal
+	//  Reset cart items, hide the success message, and show the original cart modal
 	const clearCartHandler = () => {
 		setDidSubmit(false);
 		setIsCheckout(false);
@@ -60,7 +60,7 @@ const Cart = (props) => {
 		cartCtx.onHideCart();
 	};
 
-  // Cart contents read from cartCtx
+	// Cart contents read from cartCtx
 	const cartItems = (
 		<ul className={classes['cart-items']}>
 			{cartCtx.cartItems.map((item) => (
@@ -76,7 +76,7 @@ const Cart = (props) => {
 		</ul>
 	);
 
-  // Buttons for the original modal content
+	// Buttons for the original modal content
 	const modalActions = (
 		<div className={classes.actions}>
 			<button onClick={cartCtx.onHideCart} className={classes['button--alt']}>
@@ -90,7 +90,7 @@ const Cart = (props) => {
 		</div>
 	);
 
-  // Original Modal Content
+	// Original Modal Content
 	const cartModalContent = (
 		<Fragment>
 			{cartItems}
@@ -108,10 +108,10 @@ const Cart = (props) => {
 		</Fragment>
 	);
 
-  // Model Content while the data is being transmitted
+	// Model Content while the data is being transmitted
 	const isSubmittingModalContent = <p>Sending order data...</p>;
 
-  // Model Content after successfully transmitting data
+	// Model Content after successfully transmitting data
 	const didSubmitModalContent = (
 		<Fragment>
 			<p>Successfully sent the order!</p>
@@ -124,7 +124,7 @@ const Cart = (props) => {
 	);
 
 	return (
-		<Modal onClick={clearCartHandler}>
+		<Modal onClick={cartCtx.onHideCart}>
 			{!isSubmitting && !didSubmit && cartModalContent}
 			{isSubmitting && isSubmittingModalContent}
 			{!isSubmitting && didSubmit && didSubmitModalContent}
