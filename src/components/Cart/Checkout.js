@@ -60,7 +60,7 @@ const Checkout = (props) => {
 	const confirmHandler = (e) => {
 		e.preventDefault();
 
-    // shows error if user submits it directly without touching the input field
+		// shows error if user submits it directly without touching the input field
 		nameInputTouched();
 		streetInputTouched();
 		postalCodeInputTouched();
@@ -110,7 +110,7 @@ const Checkout = (props) => {
 					onBlur={inputNameBlurHandler}
 					value={enteredName}
 				/>
-				{nameInputIsInvalid && <p>Please enter a valid name</p>}
+				<p>Please enter a valid name</p>
 			</div>
 			<div className={streetControlClasses}>
 				<label htmlFor='street'>Street</label>
@@ -121,7 +121,7 @@ const Checkout = (props) => {
 					onBlur={inputStreetBlurHandler}
 					value={enteredStreet}
 				/>
-				{streetInputIsInvalid && <p>Please enter a valid street name</p>}
+				<p>Please enter a valid street name</p>
 			</div>
 			<div className={postalCodeControlClasses}>
 				<label htmlFor='postal'>Postal Code</label>
@@ -132,9 +132,7 @@ const Checkout = (props) => {
 					onBlur={inputPostalCodeBlurHandler}
 					value={enteredPostalCode}
 				/>
-				{postalCodeInputIsInvalid && (
-					<p>Please enter a valid Postal Code (6 characters long)</p>
-				)}
+				<p>Please enter a valid Postal Code (6 characters long)</p>
 			</div>
 			<div className={cityControlClasses}>
 				<label htmlFor='city'>City</label>
@@ -145,11 +143,11 @@ const Checkout = (props) => {
 					onBlur={inputCityBlurHandler}
 					value={enteredCity}
 				/>
-				{cityInputIsInvalid && <p>Please enter a valid city name</p>}
+				<p>Please enter a valid city name</p>
 			</div>
 			<div className={classes.actions}>
 				<button type='button' onClick={props.onCancel}>
-					Cancel
+					Back
 				</button>
 				<button className={classes.submit}>Confirm</button>
 			</div>

@@ -93,7 +93,7 @@ const Cart = (props) => {
 	// Original Modal Content
 	const cartModalContent = (
 		<Fragment>
-			{cartItems}
+			{!isCheckout && cartItems}
 			<div className={classes.total}>
 				<span>Total Amount</span>
 				<span>{totalAmount}</span>
