@@ -4,6 +4,8 @@ import Modal from '../UI/Modal/Modal';
 import CartItem from './CartItem';
 import Checkout from './Checkout';
 import classes from './Cart.module.css';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 const Cart = (props) => {
 	const cartCtx = useContext(CartContext);
@@ -78,16 +80,22 @@ const Cart = (props) => {
 
 	// Buttons for the original modal content
 	const modalActions = (
-		<div className={classes.actions}>
-			<button onClick={cartCtx.onHideCart} className={classes['button--alt']}>
+		<Stack sx={{ justifyContent: 'flex-end' }} direction='row' spacing={2}>
+			<Button
+				sx={{ textTransform: 'none', borderRadius: '2rem' }}
+				variant='outlined'
+				onClick={cartCtx.onHideCart}>
 				Close
-			</button>
+			</Button>
 			{hasItems && (
-				<button onClick={orderHandler} className={classes.button}>
+				<Button
+					sx={{ textTransform: 'none', borderRadius: '2rem' }}
+					variant='contained'
+					onClick={orderHandler}>
 					Order
-				</button>
+				</Button>
 			)}
-		</div>
+		</Stack>
 	);
 
 	// Original Modal Content

@@ -1,6 +1,8 @@
 import React from 'react';
 import useInput from '../hooks/use-input';
 import classes from './Checkout.module.css';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 const isNotEmpty = (value) => value.trim() !== '';
 const isSixChars = (value) => value.trim().length === 6;
@@ -145,12 +147,20 @@ const Checkout = (props) => {
 				/>
 				<p>Please enter a valid city name</p>
 			</div>
-			<div className={classes.actions}>
-				<button type='button' onClick={props.onCancel}>
+			<Stack sx={{ justifyContent: 'flex-end' }} direction='row' spacing={2}>
+				<Button
+					sx={{ textTransform: 'none', borderRadius: '2rem' }}
+					variant='outlined'
+					onClick={props.onCancel}>
 					Back
-				</button>
-				<button className={classes.submit}>Confirm</button>
-			</div>
+				</Button>
+				<Button
+					sx={{ textTransform: 'none', borderRadius: '2rem' }}
+					variant='contained'
+					type='submit'>
+					Confirm
+				</Button>
+			</Stack>
 		</form>
 	);
 };

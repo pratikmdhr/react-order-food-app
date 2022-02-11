@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import Input from '../../UI/Input/Input';
 import classes from './MealItemForm.module.css';
+import Button from '@mui/material/Button';
 
 const MealItemForm = (props) => {
 	const [quantityIsValid, SetQuantityIsValid] = useState(true);
@@ -36,7 +37,12 @@ const MealItemForm = (props) => {
 					defaultValue: '1',
 				}}
 			/>
-			<button>+ Add</button>
+			<Button
+				sx={{ textTransform: 'none', borderRadius: '2rem' }}
+				variant='contained'
+				type='submit'>
+				+ Add
+			</Button>
 			{!quantityIsValid && <p>Please enter a valid number (1-5)</p>}
 		</form>
 	);
