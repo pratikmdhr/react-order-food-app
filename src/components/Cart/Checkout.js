@@ -1,8 +1,8 @@
 import React from 'react';
 import useInput from '../hooks/use-input';
-import classes from './Checkout.module.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 const isNotEmpty = (value) => value.trim() !== '';
 const isSixChars = (value) => value.trim().length === 6;
@@ -87,66 +87,90 @@ const Checkout = (props) => {
 		resetCity();
 	};
 
-	// Add invalid classes to input fields if input is not valid
-	const nameControlClasses = `${classes.control} ${
-		nameInputIsInvalid ? classes.invalid : ''
-	}`;
-	const streetControlClasses = `${classes.control} ${
-		streetInputIsInvalid ? classes.invalid : ''
-	}`;
-	const postalCodeControlClasses = `${classes.control} ${
-		postalCodeInputIsInvalid ? classes.invalid : ''
-	}`;
-	const cityControlClasses = `${classes.control} ${
-		cityInputIsInvalid ? classes.invalid : ''
-	}`;
-
 	return (
-		<form className={classes.form} onSubmit={confirmHandler}>
-			<div className={nameControlClasses}>
-				<label htmlFor='name'>Your Name</label>
-				<input
-					type='text'
-					id='name'
-					onChange={inputNameChangeHandler}
-					onBlur={inputNameBlurHandler}
-					value={enteredName}
-				/>
-				<p>Please enter a valid name</p>
-			</div>
-			<div className={streetControlClasses}>
-				<label htmlFor='street'>Street</label>
-				<input
-					type='text'
-					id='street'
-					onChange={inputStreetChangeHandler}
-					onBlur={inputStreetBlurHandler}
-					value={enteredStreet}
-				/>
-				<p>Please enter a valid street name</p>
-			</div>
-			<div className={postalCodeControlClasses}>
-				<label htmlFor='postal'>Postal Code</label>
-				<input
-					type='text'
-					id='postal'
-					onChange={inputPostalCodeChangeHandler}
-					onBlur={inputPostalCodeBlurHandler}
-					value={enteredPostalCode}
-				/>
-				<p>Please enter a valid Postal Code (6 characters long)</p>
-			</div>
-			<div className={cityControlClasses}>
-				<label htmlFor='city'>City</label>
-				<input
-					type='text'
-					id='city'
-					onChange={inputCityChangeHandler}
-					onBlur={inputCityBlurHandler}
-					value={enteredCity}
-				/>
-				<p>Please enter a valid city name</p>
-			</div>
+		<Stack component='form' onSubmit={confirmHandler}>
+			<TextField
+				sx={{
+					'& .MuiOutlinedInput-root': {
+						width: '60%',
+						'& fieldset': {
+							borderColor: `${nameInputIsInvalid ? 'red' : 'primary'}`,
+						},
+					},
+				}}
+				size='small'
+				id='name'
+				label='Name'
+				variant='outlined'
+				helperText={nameInputIsInvalid ? 'Please enter a valid name' : ' '}
+				onChange={inputNameChangeHandler}
+				onBlur={inputNameBlurHandler}
+				value={enteredName}
+				margin='dense'
+			/>
+			<TextField
+				sx={{
+					'& .MuiOutlinedInput-root': {
+						width: '60%',
+						'& fieldset': {
+							borderColor: `${streetInputIsInvalid ? 'red' : 'primary'}`,
+						},
+					},
+				}}
+				size='small'
+				id='street'
+				label='Street'
+				variant='outlined'
+				helperText={
+					streetInputIsInvalid ? 'Please enter a valid street name' : ' '
+				}
+				onChange={inputStreetChangeHandler}
+				onBlur={inputStreetBlurHandler}
+				value={enteredStreet}
+				margin='dense'
+			/>
+			<TextField
+				sx={{
+					'& .MuiOutlinedInput-root': {
+						width: '60%',
+						'& fieldset': {
+							borderColor: `${postalCodeInputIsInvalid ? 'red' : 'primary'}`,
+						},
+					},
+				}}
+				size='small'
+				id='postal'
+				label='Postal Code'
+				variant='outlined'
+				helperText={
+					postalCodeInputIsInvalid
+						? 'Please enter a valid Postal Code (6 characters long)'
+						: ' '
+				}
+				onChange={inputPostalCodeChangeHandler}
+				onBlur={inputPostalCodeBlurHandler}
+				value={enteredPostalCode}
+				margin='dense'
+			/>
+			<TextField
+				sx={{
+					'& .MuiOutlinedInput-root': {
+						width: '60%',
+						'& fieldset': {
+							borderColor: `${cityInputIsInvalid ? 'red' : 'primary'}`,
+						},
+					},
+				}}
+				size='small'
+				id='city'
+				label='City'
+				variant='outlined'
+				helperText={cityInputIsInvalid ? 'Please enter a valid city name' : ' '}
+				onChange={inputCityChangeHandler}
+				onBlur={inputCityBlurHandler}
+				value={enteredCity}
+				margin='dense'
+			/>
 			<Stack sx={{ justifyContent: 'flex-end' }} direction='row' spacing={2}>
 				<Button
 					sx={{ textTransform: 'none', borderRadius: '2rem' }}
@@ -161,7 +185,7 @@ const Checkout = (props) => {
 					Confirm
 				</Button>
 			</Stack>
-		</form>
+		</Stack>
 	);
 };
 
