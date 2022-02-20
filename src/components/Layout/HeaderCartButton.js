@@ -2,6 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import CartContext from '../../store/cart-context';
 import CartIcon from '../Cart/CartIcon';
 import classes from './HeaderCartButton.module.css';
+import Badge from '@mui/material/Badge';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const HeaderCartButton = (props) => {
 	const cartCtx = useContext(CartContext);
@@ -16,7 +20,6 @@ const HeaderCartButton = (props) => {
 	const { showCart } = cartCtx;
 	// Displays the bump animation for the cart everytime an item is added to the cart
 	useEffect(() => {
-    
 		// to disable bump animation if the cart modal is shown
 		if (showCart) return;
 
@@ -28,16 +31,21 @@ const HeaderCartButton = (props) => {
 		return () => clearTimeout(timer);
 	}, [numberOfCartItems, showCart]);
 
-	const btnClasses = `${classes.button} ${bumpAnimation && classes.bump}`;
+	const btnClasses = `${bumpAnimation && classes.bump}`;
 
 	return (
-		<button onClick={cartCtx.onShowCart} className={btnClasses}>
-			<span className={classes.icon}>
-				<CartIcon />
-			</span>
-			<span>Cart</span>
-			<span className={classes.badge}>{numberOfCartItems}</span>
-		</button>
+		<Button
+			className={btnClasses}
+			onClick={cartCtx.onShowCart}
+			variant='contained'
+			sx={{ textTransform: 'none', borderRadius: '2rem' }}
+			startIcon={
+				<Badge badgeContent={numberOfCartItems} color='success'>
+					<ShoppingCartIcon />
+				</Badge>
+			}>
+			Cart
+		</Button>
 	);
 };
 
