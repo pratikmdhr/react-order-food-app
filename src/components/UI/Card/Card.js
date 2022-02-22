@@ -1,8 +1,17 @@
 import React from 'react';
-import classes from './Card.module.css';
+import Paper from '@mui/material/Paper';
 
 const Card = (props) => {
-	return <div className={classes.card}>{props.children}</div>;
+	return (
+		<Paper
+			sx={{
+				borderRadius: '14px',
+				padding: '1rem',
+			}}
+			elevation={12}>
+			{props.children}
+		</Paper>
+	);
 };
 
 export default Card;

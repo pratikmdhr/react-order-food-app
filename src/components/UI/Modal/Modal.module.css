@@ -9,7 +9,7 @@
 }
 
 .modal {
-	position: absolute;
+	position: fixed;
 	top: 15vh;
 	left: 50%;
 	max-height: 90vh;

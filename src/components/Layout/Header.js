@@ -3,6 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import HeaderCartButton from './HeaderCartButton';
+import StorefrontIcon from '@mui/icons-material/Storefront';
 import mealsImage from '../../assets/meals.jpg';
 import classes from './Header.module.css';
 
@@ -11,7 +12,11 @@ const Header = (props) => {
 		<Fragment>
 			<AppBar position='fixed'>
 				<Toolbar>
-					<Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+					<StorefrontIcon />
+					<Typography
+						variant='h6'
+						component='div'
+						sx={{ flexGrow: 1, paddingLeft: '1rem' }}>
 						Delicious Meals
 					</Typography>
 					<HeaderCartButton />
