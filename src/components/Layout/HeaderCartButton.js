@@ -33,6 +33,7 @@ const HeaderCartButton = (props) => {
 
 	return (
 		<Button
+			color='secondary'
 			className={btnClasses}
 			onClick={cartCtx.onShowCart}
 			variant='contained'

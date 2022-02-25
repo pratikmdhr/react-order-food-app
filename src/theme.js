@@ -4,10 +4,10 @@ const theme = createTheme({
 	spacing: 4,
 	palette: {
 		primary: {
-			main: '#3f51b5',
+			main: '#1565c0',
 		},
 		secondary: {
-			main: '#f50057',
+			main: '#455a64',
 		},
 		background: {
 			default: '#fafafa',
