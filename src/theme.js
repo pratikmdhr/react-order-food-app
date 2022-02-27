@@ -4,13 +4,16 @@ const theme = createTheme({
 	spacing: 4,
 	palette: {
 		primary: {
-			main: '#1565c0',
+			main: '#aa2e25',
 		},
 		secondary: {
-			main: '#455a64',
+			main: '#fff',
+		},
+		info: {
+			main: '#47824a',
 		},
 		background: {
-			default: '#fafafa',
+			default: '#e0e0e0',
 		},
 	},
 	typography: {

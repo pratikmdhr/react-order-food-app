@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import CartContext from '../../store/cart-context';
 import classes from './HeaderCartButton.module.css';
 import Badge from '@mui/material/Badge';
-import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const HeaderCartButton = (props) => {
@@ -32,19 +32,15 @@ const HeaderCartButton = (props) => {
 	const btnClasses = `${bumpAnimation && classes.bump}`;
 
 	return (
-		<Button
+		<IconButton
 			color='secondary'
 			className={btnClasses}
 			onClick={cartCtx.onShowCart}
-			variant='contained'
-			sx={{ textTransform: 'none', borderRadius: '2rem' }}
-			startIcon={
-				<Badge badgeContent={numberOfCartItems} color='success'>
-					<ShoppingCartIcon />
-				</Badge>
-			}>
-			Cart
-		</Button>
+			aria-label='add to shopping cart'>
+			<Badge badgeContent={numberOfCartItems} color='info'>
+				<ShoppingCartIcon sx={{ fontSize: 28 }} />
+			</Badge>
+		</IconButton>
 	);
 };
 

@@ -10,7 +10,7 @@ import classes from './Header.module.css';
 const Header = (props) => {
 	return (
 		<Fragment>
-			<AppBar position='fixed'>
+			<AppBar position='fixed' color='primary' sx={{ padding: '0 1rem' }}>
 				<Toolbar>
 					<StorefrontIcon />
 					<Typography
