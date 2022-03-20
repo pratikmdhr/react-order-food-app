@@ -2,12 +2,13 @@ import React, { Fragment } from 'react';
 import reactDom from 'react-dom';
 
 import classes from './Modal.module.css';
+import Box from '@mui/material/Box';
 
 const Backdrop = (props) => (
-	<div onClick={props.onClick} className={classes.backdrop}></div>
+	<Box onClick={props.onClick} className={classes.backdrop}></Box>
 );
 const ModalOverlay = (props) => (
-	<div className={classes.modal}>{props.children}</div>
+	<Box className={classes.modal}>{props.children}</Box>
 );
 
 const portalBackdropEl = document.querySelector('#root-backdrop');

@@ -4,19 +4,20 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
+import Box from '@mui/material/Box';
 
 const CartItem = (props) => {
 	const price = `$${props.price.toFixed(2)}`;
   
 	return (
 		<li className={classes['cart-item']}>
-			<div>
+			<Box>
 				<h2>{props.name}</h2>
-				<div className={classes.summary}>
+				<Box className={classes.summary}>
 					<span className={classes.price}>{price}</span>
 					<span className={classes.quantity}>x {props.quantity}</span>
-				</div>
-			</div>
+				</Box>
+			</Box>
 			<Stack sx={{ justifyContent: 'flex-end' }} direction='row' spacing={2}>
 				<Button
 					onClick={props.onRemove}

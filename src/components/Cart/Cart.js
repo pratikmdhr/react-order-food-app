@@ -6,6 +6,7 @@ import Checkout from './Checkout';
 import classes from './Cart.module.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 const Cart = (props) => {
 	const cartCtx = useContext(CartContext);
@@ -102,10 +103,10 @@ const Cart = (props) => {
 	const cartModalContent = (
 		<Fragment>
 			{!isCheckout && cartItems}
-			<div className={classes.total}>
+			<Box className={classes.total}>
 				<span>Total Amount</span>
 				<span>{totalAmount}</span>
-			</div>
+			</Box>
 			{isCheckout && (
 				<Checkout
 					onConfirm={submitOrderHandler}
@@ -123,11 +124,11 @@ const Cart = (props) => {
 	const didSubmitModalContent = (
 		<Fragment>
 			<p>Successfully sent the order!</p>
-			<div className={classes.actions}>
+			<Box className={classes.actions}>
 				<button onClick={clearCartHandler} className={classes.button}>
 					Close
 				</button>
-			</div>
+			</Box>
 		</Fragment>
 	);
 

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import MealItemForm from './MealItemForm';
 import classes from './MealItem.module.css';
 import CartContext from '../../../store/cart-context';
+import Box from '@mui/material/Box';
 
 const MealItem = ({ id, name, description, price }) => {
 	const cartCtx = useContext(CartContext);
@@ -16,14 +17,14 @@ const MealItem = ({ id, name, description, price }) => {
 	};
 	return (
 		<li className={classes.meal}>
-			<div>
+			<Box>
 				<h3>{name}</h3>
-				<div className={classes.description}>{description}</div>
-				<div className={classes.price}>${price.toFixed(2)}</div>
-			</div>
-			<div>
+				<Box className={classes.description}>{description}</Box>
+				<Box className={classes.price}>${price.toFixed(2)}</Box>
+			</Box>
+			<Box>
 				<MealItemForm id={id} onAddToCart={addToCartHandler} />
-			</div>
+			</Box>
 		</li>
 	);
 };

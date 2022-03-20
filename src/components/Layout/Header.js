@@ -6,6 +6,7 @@ import HeaderCartButton from './HeaderCartButton';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import mealsImage from '../../assets/meals.jpg';
 import classes from './Header.module.css';
+import Box from '@mui/material/Box';
 
 const Header = (props) => {
 	return (
@@ -22,9 +23,9 @@ const Header = (props) => {
 					<HeaderCartButton />
 				</Toolbar>
 			</AppBar>
-			<div className={classes['main-image']}>
+			<Box className={classes['main-image']}>
 				<img src={mealsImage} alt='Delicious food' />
-			</div>
+			</Box>
 		</Fragment>
 	);
 };
