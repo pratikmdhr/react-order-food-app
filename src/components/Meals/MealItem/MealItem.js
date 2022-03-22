@@ -3,11 +3,11 @@ import MealItemForm from './MealItemForm';
 import classes from './MealItem.module.css';
 import CartContext from '../../../store/cart-context';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
-const MealItem = ({ id, name, description, price }) => {
+const MealItem = ({ id, name, description, price, imageUrl }) => {
 	const cartCtx = useContext(CartContext);
 	const addToCartHandler = (quantity) => {
-		// console.log(id, name, quantity, price);
 		cartCtx.addItem({
 			id,
 			name,
@@ -16,16 +16,23 @@ const MealItem = ({ id, name, description, price }) => {
 		});
 	};
 	return (
-		<li className={classes.meal}>
-			<Box>
+		<Grid
+			container
+			flexWrap='nowrap'
+			direction='row'
+			py={6}
+			px={{ xs: 3, sm: 6 }}
+			className={classes.meal}>
+			<Grid className={classes.mealContent} item container direction='column' xs={7} sm={9}>
 				<h3>{name}</h3>
-				<Box className={classes.description}>{description}</Box>
 				<Box className={classes.price}>${price.toFixed(2)}</Box>
-			</Box>
-			<Box>
+				<Box className={classes.description}>{description}</Box>
 				<MealItemForm id={id} onAddToCart={addToCartHandler} />
-			</Box>
-		</li>
+			</Grid>
+			<Grid item alignItems='center' className={classes.image} xs={5} sm={3}>
+				<img src={imageUrl} alt='' />
+			</Grid>
+		</Grid>
 	);
 };
 

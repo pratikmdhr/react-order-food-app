@@ -38,7 +38,7 @@ const MealItemForm = (props) => {
 				}}
 			/>
 			<Button
-				sx={{ textTransform: 'none', borderRadius: '2rem' }}
+				sx={{ textTransform: 'none', borderRadius: '2rem', height: '2rem' }}
 				variant='contained'
 				type='submit'>
 				+ Add

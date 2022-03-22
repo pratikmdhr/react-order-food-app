@@ -1,9 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import CartContext from '../../store/cart-context';
+import { styled } from '@mui/material/styles';
 import classes from './HeaderCartButton.module.css';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+	'& .MuiBadge-badge': {
+		fontSize: '0.9rem',
+		fontWeight: 600,
+		padding: theme.spacing(2.5, 1.5),
+	},
+}));
 
 const HeaderCartButton = (props) => {
 	const cartCtx = useContext(CartContext);
@@ -37,9 +46,9 @@ const HeaderCartButton = (props) => {
 			className={btnClasses}
 			onClick={cartCtx.onShowCart}
 			aria-label='add to shopping cart'>
-			<Badge badgeContent={numberOfCartItems} color='info'>
+			<StyledBadge badgeContent={numberOfCartItems} color='info'>
 				<ShoppingCartIcon sx={{ fontSize: 28 }} />
-			</Badge>
+			</StyledBadge>
 		</IconButton>
 	);
 };

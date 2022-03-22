@@ -13,9 +13,9 @@ const Header = (props) => {
 		<Fragment>
 			<AppBar position='fixed' color='primary' sx={{ padding: '0 1rem' }}>
 				<Toolbar>
-					<StorefrontIcon />
+					<StorefrontIcon sx={{ fontSize: 24 }}/>
 					<Typography
-						variant='h6'
+						variant='h5'
 						component='div'
 						sx={{ flexGrow: 1, paddingLeft: '1rem' }}>
 						Delicious Meals
