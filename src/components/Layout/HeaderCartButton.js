@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import CartContext from '../../store/cart-context';
 import { styled } from '@mui/material/styles';
-import classes from './HeaderCartButton.module.css';
 import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -14,7 +13,32 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 	},
 }));
 
-const HeaderCartButton = (props) => {
+const CartIconButton = styled(IconButton)(
+	({ bump }) =>
+		bump && {
+			animation: 'bump 300ms ease-out',
+
+			'@keyframes bump': {
+				'0%': {
+					transform: 'scale(1)',
+				},
+				'10%': {
+					transform: 'scale(0.9)',
+				},
+				'30%': {
+					transform: 'scale(1.1)',
+				},
+				' 50%': {
+					transform: 'scale(1.15)',
+				},
+				'100%': {
+					transform: 'scale(1)',
+				},
+			},
+		}
+);
+
+const HeaderCartButton = () => {
 	const cartCtx = useContext(CartContext);
 	const [bumpAnimation, setBumpAnimation] = useState(true);
 
@@ -38,18 +62,16 @@ const HeaderCartButton = (props) => {
 		return () => clearTimeout(timer);
 	}, [numberOfCartItems, showCart]);
 
-	const btnClasses = `${bumpAnimation && classes.bump}`;
-
 	return (
-		<IconButton
+		<CartIconButton
 			color='secondary'
-			className={btnClasses}
+			bump={bumpAnimation}
 			onClick={cartCtx.onShowCart}
 			aria-label='add to shopping cart'>
 			<StyledBadge badgeContent={numberOfCartItems} color='info'>
 				<ShoppingCartIcon sx={{ fontSize: 28 }} />
 			</StyledBadge>
-		</IconButton>
+		</CartIconButton>
 	);
 };
 
