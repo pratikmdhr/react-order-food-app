@@ -1,9 +1,24 @@
 import React, { Fragment, useContext, useState } from 'react';
 import CartContext from '../../store/cart-context';
+import { styled } from '@mui/material';
 import Modal from '../UI/Modal/Modal';
 import CartItem from './CartItem';
 import Checkout from './Checkout';
-import classes from './Cart.module.css';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+
+const CartItemsContainer = styled(Grid)({
+	overflowY: 'auto',
+	maxHeight: "calc(100vh - 25rem)"
+});
+
+const StyledButton = styled(Button)({
+	textTransform: 'none',
+	borderRadius: '2rem',
+});
 
 const Cart = (props) => {
 	const cartCtx = useContext(CartContext);
@@ -62,7 +77,7 @@ const Cart = (props) => {
 
 	// Cart contents read from cartCtx
 	const cartItems = (
-		<ul className={classes['cart-items']}>
+		<CartItemsContainer>
 			{cartCtx.cartItems.map((item) => (
 				<CartItem
 					key={item.id}
@@ -73,31 +88,35 @@ const Cart = (props) => {
 					onAdd={cartItemAddHandler.bind(null, item)}
 				/>
 			))}
-		</ul>
+		</CartItemsContainer>
 	);
 
 	// Buttons for the original modal content
 	const modalActions = (
-		<div className={classes.actions}>
-			<button onClick={cartCtx.onHideCart} className={classes['button--alt']}>
+		<Stack sx={{ justifyContent: 'flex-end' }} direction='row' spacing={4}>
+			<StyledButton variant='outlined' onClick={cartCtx.onHideCart}>
 				Close
-			</button>
+			</StyledButton>
 			{hasItems && (
-				<button onClick={orderHandler} className={classes.button}>
+				<StyledButton variant='contained' onClick={orderHandler}>
 					Order
-				</button>
+				</StyledButton>
 			)}
-		</div>
+		</Stack>
 	);
 
 	// Original Modal Content
 	const cartModalContent = (
 		<Fragment>
 			{!isCheckout && cartItems}
-			<div className={classes.total}>
-				<span>Total Amount</span>
-				<span>{totalAmount}</span>
-			</div>
+			<Grid container justifyContent='space-between' alignItems='center' my={4}>
+				<Typography fontSize='1.5rem' fontWeight='bold'>
+					Total Amount
+				</Typography>
+				<Typography fontSize='1.5rem' fontWeight='bold'>
+					{totalAmount}
+				</Typography>
+			</Grid>
 			{isCheckout && (
 				<Checkout
 					onConfirm={submitOrderHandler}
@@ -109,18 +128,22 @@ const Cart = (props) => {
 	);
 
 	// Model Content while the data is being transmitted
-	const isSubmittingModalContent = <p>Sending order data...</p>;
+	const isSubmittingModalContent = (
+		<Typography variant='body1'>Sending order data...</Typography>
+	);
 
 	// Model Content after successfully transmitting data
 	const didSubmitModalContent = (
-		<Fragment>
-			<p>Successfully sent the order!</p>
-			<div className={classes.actions}>
-				<button onClick={clearCartHandler} className={classes.button}>
+		<Box textAlign='center'>
+			<Typography pb={5} variant='h5'>
+				Successfully sent the order!
+			</Typography>
+			<Box>
+				<StyledButton variant='outlined' onClick={clearCartHandler}>
 					Close
-				</button>
-			</div>
-		</Fragment>
+				</StyledButton>
+			</Box>
+		</Box>
 	);
 
 	return (

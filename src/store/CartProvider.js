@@ -124,11 +124,11 @@ const CartProvider = (props) => {
 		setIsLoading(true);
 		const fetchMenu = async () => {
 			const response = await fetch(
-				`https://food-order-app-4fc86-default-rtdb.firebaseio.com/menu.json`
+				`https://food-order-app-4fc86-default-rtdb.firebaseio.com/new-menu.json`
 			);
 
 			if (!response.ok) {
-				throw new Error('Something went wrong!');
+				throw new Error('Oops, something went wrong!');
 			}
 			const responseData = await response.json();
 			const loadedMeals = [];
@@ -136,9 +136,12 @@ const CartProvider = (props) => {
 			for (const key in responseData) {
 				loadedMeals.push({
 					id: key,
+					category: responseData[key].category,
 					name: responseData[key].name,
 					description: responseData[key].description,
 					price: responseData[key].price,
+					imageUrl: responseData[key].image,
+					isPopular: responseData[key].popular,
 				});
 			}
 			setMenu(loadedMeals);

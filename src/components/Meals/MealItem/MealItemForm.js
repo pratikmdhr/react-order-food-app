@@ -1,29 +1,24 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
+import { styled } from '@mui/material/styles';
 import Input from '../../UI/Input/Input';
-import classes from './MealItemForm.module.css';
+import Button from '@mui/material/Button';
+
+const InputQtyForm = styled('form')`
+	display: flex;
+	align-items: center;
+`;
 
 const MealItemForm = (props) => {
-	const [quantityIsValid, SetQuantityIsValid] = useState(true);
-
 	const quantityInputRef = useRef();
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		const enteredQuantity = quantityInputRef.current.value;
-		const enteredQuantityNumber = +enteredQuantity;
-		if (
-			enteredQuantity.trim().length === 0 ||
-			enteredQuantityNumber < 1 ||
-			enteredQuantityNumber > 5
-		) {
-			SetQuantityIsValid(false);
-			return;
-		}
-		props.onAddToCart(enteredQuantityNumber);
+		const enteredQuantity = +quantityInputRef.current.value;
+		props.onAddToCart(enteredQuantity);
 	};
 
 	return (
-		<form className={classes.form} onSubmit={submitHandler}>
+		<InputQtyForm onSubmit={submitHandler}>
 			<Input
 				ref={quantityInputRef}
 				label='Quantity'
@@ -36,9 +31,13 @@ const MealItemForm = (props) => {
 					defaultValue: '1',
 				}}
 			/>
-			<button>+ Add</button>
-			{!quantityIsValid && <p>Please enter a valid number (1-5)</p>}
-		</form>
+			<Button
+				sx={{ textTransform: 'none', borderRadius: '2rem', height: '2rem' }}
+				variant='contained'
+				type='submit'>
+				+ Add
+			</Button>
+		</InputQtyForm>
 	);
 };
 
