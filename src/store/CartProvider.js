@@ -128,7 +128,7 @@ const CartProvider = (props) => {
 			);
 
 			if (!response.ok) {
-				throw new Error('Something went wrong!');
+				throw new Error('Oops, something went wrong!');
 			}
 			const responseData = await response.json();
 			const loadedMeals = [];

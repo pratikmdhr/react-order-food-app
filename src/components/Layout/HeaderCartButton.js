@@ -15,7 +15,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const CartIconButton = styled(IconButton)(
 	({ bump }) =>
-		bump && {
+		bump === 'true' && {
 			animation: 'bump 300ms ease-out',
 
 			'@keyframes bump': {
@@ -65,7 +65,7 @@ const HeaderCartButton = () => {
 	return (
 		<CartIconButton
 			color='secondary'
-			bump={bumpAnimation}
+			bump={bumpAnimation.toString()}
 			onClick={cartCtx.onShowCart}
 			aria-label='add to shopping cart'>
 			<StyledBadge badgeContent={numberOfCartItems} color='info'>

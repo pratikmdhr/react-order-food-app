@@ -17,7 +17,7 @@ const theme = createTheme({
 		},
 	},
 	typography: {
-		fontFamily: 'Lato',
+		fontFamily: "Lato, Roboto, sans-serif",
 		fontSize: 14,
 	},
 });

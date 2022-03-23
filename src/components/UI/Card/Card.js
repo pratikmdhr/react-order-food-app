@@ -6,7 +6,7 @@ const Card = (props) => {
 		<Paper
 			sx={{
 				borderRadius: '14px',
-				padding: '1rem',
+				padding: '2.25rem 1rem',
 			}}
 			elevation={12}>
 			{props.children}

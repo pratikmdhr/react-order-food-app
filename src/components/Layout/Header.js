@@ -28,7 +28,7 @@ const Header = () => {
 			<AppBar
 				position='fixed'
 				color='primary'
-				sx={{ padding: theme.spacing(0, 4) }}>
+				sx={{ padding: theme.spacing(1, 4) }}>
 				<Toolbar>
 					<StorefrontIcon sx={{ fontSize: 24 }} />
 					<Typography

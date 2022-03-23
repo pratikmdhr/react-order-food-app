@@ -1,48 +1,64 @@
 import React from 'react';
-import classes from './CartItem.module.css';
+import { styled, useTheme } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+
+const StyledButton = styled(Button)(({ theme }) => ({
+	padding: 0,
+	minWidth: '3rem',
+	height: '2.2rem',
+	borderRadius: theme.spacing(2),
+}));
+
+const QuanityDisplay = styled('span')(({ theme }) => ({
+	padding: theme.spacing(0.5, 2),
+	border: '1px solid #ccc',
+	fontSize: '0.9rem',
+	borderRadius: theme.spacing(1.5),
+}));
 
 const CartItem = (props) => {
+	const theme = useTheme();
 	const price = `$${props.price.toFixed(2)}`;
-  
+
 	return (
-		<li className={classes['cart-item']}>
+		<Grid
+			container
+			justifyContent='space-between'
+			alignItems='center'
+			py={3}
+			my={3}
+			borderBottom={`1px dotted ${theme.palette.primary.main}`}>
 			<Box>
-				<h2>{props.name}</h2>
-				<Box className={classes.summary}>
-					<span className={classes.price}>{price}</span>
-					<span className={classes.quantity}>x {props.quantity}</span>
-				</Box>
+				<Typography fontSize='1.2rem' my={2}>
+					{props.name}
+				</Typography>
+				<Grid
+					container
+					justifyContent='space-between'
+					alignItems='center'
+					width='10rem'
+          px={3}>
+					<Typography fontWeight='bold' color={theme.palette.primary.main}>
+						{price}
+					</Typography>
+					<QuanityDisplay>x {props.quantity}</QuanityDisplay>
+				</Grid>
 			</Box>
-			<Stack sx={{ justifyContent: 'flex-end' }} direction='row' spacing={2}>
-				<Button
-					onClick={props.onRemove}
-					sx={{
-						padding: '0',
-						borderRadius: '0.5rem',
-						minWidth: '3rem',
-						height: '2.2rem',
-					}}
-					variant='outlined'>
+			<Stack justifyContent='flex-end' direction='row' spacing={4}>
+				<StyledButton onClick={props.onRemove} variant='outlined'>
 					<RemoveRoundedIcon />
-				</Button>
-				<Button
-					onClick={props.onAdd}
-					sx={{
-						padding: '0',
-						borderRadius: '0.5rem',
-						minWidth: '3rem',
-						height: '2.2rem',
-					}}
-					variant='outlined'>
+				</StyledButton>
+				<StyledButton onClick={props.onAdd} variant='outlined'>
 					<AddRoundedIcon />
-				</Button>
+				</StyledButton>
 			</Stack>
-		</li>
+		</Grid>
 	);
 };
 
